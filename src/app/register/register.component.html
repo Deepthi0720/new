@@ -1,0 +1,57 @@
+<div class="divmain">
+    <h2>Register</h2>
+    <form ngForm #regForm=ngForm>
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="user.username" #un="ngModel" required minlength="4" class="in" placeholder="Enter username" name="uname" id="name" autocomplete="off">
+        <div *ngIf="un.invalid && (un.dirty||un.touched)" style="color:red;">
+            <div *ngIf="un.errors?.required">*Name is required</div>
+            <div *ngIf="un.errors?.minlength">*Name must contain min.4 letters</div>
+        </div>
+        <label for="age">Age</label>
+        <input type="number" [(ngModel)]="user.age" #age="ngModel" pattern="^(1[89]|[2-9][0-9])$"required  class="in" placeholder="Enter age" name="age">
+        <div *ngIf="age.invalid && (age.dirty||age.touched)" style="color:red; ">
+            <div *ngIf="age.errors?.required">*Age is required</div>
+            <div *ngIf="age.errors?.pattern">*Age should be above 18</div>
+        </div>
+        <label for="gender">Gender</label>
+        <input type="radio" [(ngModel)]="user.gender" #gen="ngModel" name="gender" value="male" required>Male
+        <input type="radio"ngModel #gen="ngModel" name="gender" value="female" required>Female
+        <span *ngIf="gen.errors?.required" style="color:red;">*Gender is required</span>
+        <label for="phnum">PhoneNumber</label>
+        <input type="tel" [(ngModel)]="user.phoneNo" #ph="ngModel" required pattern="^[6-9]\d{9}$" class="in" name="phnum">
+        <div *ngIf="ph.invalid && (ph.dirty||ph.touched)" style="color:red; ">
+            <div *ngIf="ph.errors?.required">*PhoneNumber is required</div>
+            <div *ngIf="ph.errors?.pattern">*PhoneNumber should have 10 dgits</div>
+        </div>
+        <label for="dob">Date-of-birth</label>
+        <input type="date" [(ngModel)]="user.dob" #date="ngModel" class="in" name="dob" required>
+        <div *ngIf="date.invalid && (date.dirty||date.touched)" style="color:red;">
+            <div *ngIf="date.errors?.required">*Date is required</div>
+        </div>
+        <label for="password">Password</label>
+        <input type="password" [(ngModel)]="user.password" #up="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" class="in" placeholder="Enter new password" name="password">
+        <div *ngIf="up.invalid && (up.dirty||up.touched)" style="color:red;">
+            <div *ngIf="up.errors?.required">*password is required</div>
+            <div *ngIf="up.errors?.pattern">*password is invalid</div>
+        </div>
+        <label for="city">City</label>
+        <input type="text" [(ngModel)]="addr.city" #city="ngModel" pattern="^[a-zA-Z]*$"required class="in" name="city">
+        <div *ngIf="city.invalid && (city.dirty||city.touched)" style="color:red;">
+            <div *ngIf="city.errors?.required">*city is required</div>
+            <div *ngIf="city.errors?.pattern">*city is invalid</div>
+        </div>
+        <label for="state">State</label>
+        <input type="text" [(ngModel)]="addr.state" #state="ngModel" required class="in" name="state">
+        <div *ngIf="state.invalid && (state.dirty||state.touched)" style="color:red;">
+            <div *ngIf="state.errors?.required">*state is required</div>
+            <div *ngIf="state.errors?.pattern">*state is invalid</div>
+        </div>
+        <label for="country">Country</label>
+        <input type="text" [(ngModel)]="addr.country" #country="ngModel" required class="in" name="country">
+        <div *ngIf="country.invalid && (country.dirty||country.touched)" style="color:red;">
+            <div *ngIf="country.errors?.required">*Country is required</div>
+            <div *ngIf="country.errors?.pattern">*Country is invalid</div>
+        </div>
+        <button [disabled]="regForm.invalid" (click)="show()">Register</button>
+    </form>
+</div>
